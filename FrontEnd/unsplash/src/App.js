@@ -7,7 +7,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedin: false,
+      loggedin: localStorage.getItem("loggedIn"),
     };
   }
 
@@ -16,13 +16,17 @@ export default class App extends Component {
   };
 
   logout = () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("email");
+    localStorage.removeItem("username");
+
     this.setState({ loggedin: false });
   };
 
   render() {
     return (
       <div>
-        {this.state.loggedin ? <Header /> : null}
+        {this.state.loggedin ? <Header logout={this.logout} /> : null}
         {this.state.loggedin ? <Main /> : null}
         {!this.state.loggedin ? (
           <Home authenticate={this.authenticate} />

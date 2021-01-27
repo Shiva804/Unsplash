@@ -63,16 +63,36 @@ app.post("/postImage", async (req, res) => {
   }
 });
 
-app.get("/getImage/:email", async (req, res) => {
+app.get("/getUserImages", async (req, res) => {
   try {
-    const data = await UserData.find({ email: req.params.email });
+    const data = await UserData.find({ email: req.body.email });
     res.json(data);
   } catch (error) {
     res.json(error);
   }
 });
 
-app.get("/fetchUser", async (req, res) => {
+app.get("/getImages", async (req, res) => {
+  try {
+    const images = [];
+
+    const data = await UserData.find();
+
+    data.forEach((elem) => {
+      if (elem.image.length > 0) {
+        elem.image.forEach((img) => {
+          images.push(img);
+        });
+      }
+    });
+
+    res.send(images);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+app.post("/fetchUser", async (req, res) => {
   try {
     const data = await UserData.find({ email: req.body.email });
 
@@ -83,7 +103,7 @@ app.get("/fetchUser", async (req, res) => {
     const password = await bcrypt.compare(req.body.password, data[0].password);
 
     if (password) {
-      res.send("200");
+      res.send(data[0]);
     } else {
       res.send("500");
     }

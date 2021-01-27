@@ -1,0 +1,36 @@
+#img-upload {
+  width: 500px;
+  height: 340px;
+  overflow-x: hidden;
+  text-align: center;
+  border-radius: 12px;
+  outline: none;
+  background-color: rgba(224, 226, 224, 0.438);
+}
+
+#label {
+  margin-top: 50px;
+  width: 300px;
+  border-radius: 5px;
+}
+
+#rbtn,
+#ubtn {
+  margin-top: 20px;
+  font-family: FontAwesome, "Noto Sans";
+}
+
+#preview {
+  height: 130px;
+  width: 300px;
+  margin-top: 20px;
+  border-radius: 12px;
+  border: 2px black solid;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(252, 228, 228);
+}
+#ptxt {
+  font-family: FontAwesome, "Noto Sans";
+  color: rgb(41, 39, 39);
+}

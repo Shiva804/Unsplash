@@ -11,6 +11,10 @@ export default class Home extends Component {
     };
   }
 
+  handleLogin = () => {
+    this.props.authenticate();
+  };
+
   registerButton = (e) => {
     if (e === "login") {
       this.setState({ register: false });
@@ -25,7 +29,10 @@ export default class Home extends Component {
         {this.state.register ? (
           <Register register={this.registerButton} />
         ) : (
-          <Login register={this.registerButton} />
+          <Login
+            register={this.registerButton}
+            handleLogin={this.handleLogin}
+          />
         )}
       </div>
     );

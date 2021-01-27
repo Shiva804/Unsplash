@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import "../styles/login.css";
-import logo from "../my_unsplash_logo.svg";
+import logo from "../Images/my_unsplash_logo.svg";
 import TextField from "@material-ui/core/TextField";
-
+import Alert from "./Component/alert";
 import Button from "@material-ui/core/Button";
+import axios from "../config";
+
 export default class Login extends Component {
   constructor() {
     super();
 
     this.state = {
-      email: null,
-      password: null,
+      email: "",
+      password: "",
+      error: null,
     };
   }
 
@@ -19,10 +22,39 @@ export default class Login extends Component {
     if (e.target.id === "password") this.setState({ password: e.target.value });
   };
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (this.state.email == "" || this.state.password == "")
+      this.setState({ error: "Fill all the fields" });
+    else {
+      const login = {
+        email: this.state.email,
+        password: this.state.password,
+      };
+
+      const auth = await axios.post("/fetchUser", login);
+      console.log(auth.data);
+      if (auth.data == "404" || auth.data == "500") {
+        this.setState({ error: "Invalid email or password" });
+      } else {
+        localStorage.setItem("loggedIn", true);
+        localStorage.setItem("email", auth.data.email);
+        localStorage.setItem("username", auth.data.username);
+        localStorage.setItem("message", "Logged in successfully");
+        this.props.handleLogin();
+      }
+    }
+  };
+
+  handleMessage = () => {
+    this.setState({ error: null });
+  };
+
   render() {
     return (
       <div id="lg">
-        <img src={logo} id="lg-logo"></img>
+        <img src={logo} id="lg-logo" alt="lg-logo"></img>
         <Button
           id="lg-register"
           variant="contained"
@@ -40,7 +72,7 @@ export default class Login extends Component {
               label="Email"
               type="email"
               onChange={this.handleEvent}
-            />{" "}
+            />
             <br />
             <br />
             <TextField
@@ -57,6 +89,9 @@ export default class Login extends Component {
             </Button>
           </form>
         </div>
+        {this.state.error !== null ? (
+          <Alert error={this.state.error} handlemessage={this.handleMessage} />
+        ) : null}
       </div>
     );
   }

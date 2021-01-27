@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import "../styles/register.css";
-import logo from "../my_unsplash_logo.svg";
+import logo from "../Images/my_unsplash_logo.svg";
 import TextField from "@material-ui/core/TextField";
 import axios from "../config";
-import Alert from "./alert";
+import Alert from "./Component/alert";
 
 export default class Register extends Component {
   constructor() {
     super();
     this.state = {
-      email: null,
-      username: null,
-      password: null,
+      email: "",
+      username: "",
+      password: "",
       error: null,
       message: null,
     };
@@ -33,9 +33,9 @@ export default class Register extends Component {
     e.preventDefault();
 
     if (
-      this.state.email == null ||
-      this.state.username == null ||
-      this.state.password == null
+      this.state.email == "" ||
+      this.state.username == "" ||
+      this.state.password == ""
     )
       this.setState({ error: "Fill all the fields" });
     else {
@@ -51,11 +51,10 @@ export default class Register extends Component {
         this.setState({ error: "User Already Exist" });
       } else {
         this.setState({ message: "Registered Successfully" });
+        setTimeout(() => {
+          this.props.register("login");
+        }, 1500);
       }
-
-      setTimeout(() => {
-        this.props.register("login");
-      }, 1500);
     }
   };
 

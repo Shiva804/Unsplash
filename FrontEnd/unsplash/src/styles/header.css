@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap");
 body {
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@ body {
 #search {
   height: 35px;
   width: 130%;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   outline: none;
   font-size: 95%;
   padding-left: 12px;
@@ -36,8 +37,9 @@ body {
 #ls {
   display: flex;
   flex-wrap: nowrap;
-  width: 50%;
+  width: 40%;
   margin-top: 2%;
+  justify-content: space-around;
 }
 
 #add {
@@ -48,4 +50,84 @@ body {
   width: 145px;
   border-radius: 12px;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+}
+
+#avt-btn {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 300px;
+}
+
+#avt {
+  height: 30px;
+  width: 30px;
+  margin-top: 25px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#simple-popper {
+  border: 2px black solid;
+  margin-top: 7px;
+
+  height: max-content;
+  width: 140px;
+  text-align: center;
+
+  font-family: "Roboto", sans-serif, "Noto Sans";
+
+  font-weight: 500;
+
+  border-radius: 7px;
+  word-wrap: break-word;
+  background-color: rgba(224, 212, 212, 0.253);
+}
+
+#user {
+  text-shadow: 0.1px 0.2px 0.4px;
+  color: rgb(63, 56, 56);
+  margin-top: -14px;
+  font-family: "Noto Serif", serif;
+  padding-top: 20px;
+  font-size: 17px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+#signout {
+  font-family: FontAwesome, "Noto Sans";
+  width: 115px;
+  margin-top: 2px;
+  background-color: rgba(235, 40, 40, 0.911);
+  font-weight: 900;
+  color: white;
+  margin-bottom: 10px;
+}
+
+#wb {
+  font-family: FontAwesome, "Noto Sans";
+  font-size: 17px;
+  padding-top: 13px;
+  margin-top: 0px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.767);
+  text-decoration: underline;
+}
+
+#gallery {
+  height: 25px;
+  width: 25px;
+  margin-top: 2px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  #add {
+    width: 50px;
+    font-size: 10px;
+    font-weight: 300;
+  }
 }
