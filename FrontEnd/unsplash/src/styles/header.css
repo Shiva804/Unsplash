@@ -6,7 +6,15 @@ body {
   padding: 0;
 }
 
-#header {
+.header {
+  top: 0;
+  position: sticky;
+  background-color: white;
+  padding-bottom: 20px;
+  z-index: 2;
+}
+
+.head {
   height: 30%;
   display: flex;
   flex-wrap: nowrap;
@@ -16,7 +24,7 @@ body {
 #search {
   height: 35px;
   width: 130%;
-  /* margin-left: 5%; */
+  margin-left: 2px;
   outline: none;
   font-size: 95%;
   padding-left: 12px;
@@ -34,12 +42,11 @@ body {
   color: #bdbdbd;
 }
 
-#ls {
+.ls {
   display: flex;
   flex-wrap: nowrap;
   width: 40%;
   margin-top: 2%;
-  justify-content: space-around;
 }
 
 #add {
@@ -62,6 +69,7 @@ body {
 
 #avt {
   height: 30px;
+  margin-left: 15px;
   width: 30px;
   margin-top: 25px;
   cursor: pointer;
@@ -83,6 +91,7 @@ body {
   border-radius: 7px;
   word-wrap: break-word;
   background-color: rgba(224, 212, 212, 0.253);
+  z-index: 2;
 }
 
 #user {
@@ -116,18 +125,25 @@ body {
   text-decoration: underline;
 }
 
-#gallery {
-  height: 25px;
-  width: 25px;
-  margin-top: 2px;
-  padding-left: 10px;
-  cursor: pointer;
+.gal {
+  justify-content: space-around;
 }
 
-@media only screen and (max-width: 600px) {
+.gallery {
+  height: 30px;
+  width: 30px;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+@media only screen and (max-width: 850px) {
   #add {
-    width: 50px;
+    width: 110px;
     font-size: 10px;
-    font-weight: 300;
+  }
+  #search {
+    width: 100px;
+    margin-top: 10px;
   }
 }

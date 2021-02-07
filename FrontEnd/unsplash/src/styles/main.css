@@ -1,0 +1,22 @@
+.main {
+  margin: 20px;
+}
+
+.grid-item {
+  height: 250px;
+  width: 350px;
+  border: 2px black solid;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.image-div {
+  padding: 10px;
+  height: max-content;
+  width: 300px;
+}
+
+.img {
+  height: 200px;
+  width: 100%;
+}

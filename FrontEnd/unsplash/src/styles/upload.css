@@ -1,21 +1,25 @@
 #img-upload {
   width: 500px;
-  height: 340px;
+  height: 360px;
   overflow-x: hidden;
   text-align: center;
   border-radius: 12px;
   outline: none;
-  background-color: rgba(224, 226, 224, 0.438);
+  background-color: rgba(240, 190, 190, 0.438);
+}
+
+.label {
+  margin-top: 10px;
 }
 
 #label {
-  margin-top: 50px;
   width: 300px;
   border-radius: 5px;
+  margin-right: 50px;
 }
 
 #rbtn,
-#ubtn {
+#brw_btn {
   margin-top: 20px;
   font-family: FontAwesome, "Noto Sans";
 }
@@ -28,9 +32,16 @@
   border: 2px black solid;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgb(252, 228, 228);
+  background-color: rgb(252, 249, 249);
 }
 #ptxt {
   font-family: FontAwesome, "Noto Sans";
   color: rgb(41, 39, 39);
+}
+
+#ubtn {
+  font-family: FontAwesome, "Noto Sans";
+  color: white;
+  background-color: teal;
+  margin-top: 15px;
 }

@@ -10,7 +10,8 @@ var cors = require("cors");
 const UserData = require("./models/UserData");
 
 require("dotenv").config();
-app.use(bodyparser.json());
+app.use(bodyparser.json({ limit: "50mb" }));
+
 app.use(cors());
 //Connect to DB
 mongoose.connect(
@@ -47,7 +48,7 @@ app.post("/registerUser", async (req, res) => {
 
 app.post("/postImage", async (req, res) => {
   try {
-    const imageObj = { label: req.body.label, image_url: req.body.imageUrl };
+    const imageObj = { label: req.body.label, data_url: req.body.dataUrl };
     const images = await UserData.find({ email: req.body.email });
     const imageData = images[0].image;
     imageData.push(imageObj);
@@ -97,18 +98,17 @@ app.post("/fetchUser", async (req, res) => {
     const data = await UserData.find({ email: req.body.email });
 
     if (!data.length) {
-      res.send("404");
+      res.status(404).send("404");
     }
-
     const password = await bcrypt.compare(req.body.password, data[0].password);
 
     if (password) {
       res.send(data[0]);
     } else {
-      res.send("500");
+      res.status(500).send("500");
     }
   } catch (error) {
-    res.json(error);
+    res.status(404);
   }
 });
 

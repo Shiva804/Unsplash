@@ -3,17 +3,49 @@ import ImageUploading from "react-images-uploading";
 import Dialog from "@material-ui/core/Dialog";
 import "../styles/upload.css";
 import Button from "@material-ui/core/Button";
+import Alert from "./Component/alert";
+import axios from "../config";
 
 export default function Upload(props) {
   const [images, setImages] = React.useState([]);
+  const [label, setLabel] = React.useState("Untitled");
+  const [error, setError] = React.useState(null);
+
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+
     setImages(imageList);
   };
 
   const handleClose = () => {
     props.handleClose();
+  };
+
+  const handleMessage = () => {
+    setError(null);
+  };
+
+  const handleChange = (e) => {
+    setLabel(e.target.value);
+  };
+
+  const handleUpload = async () => {
+    if (images.length === 0) {
+      setError("Select an image to upload..");
+    } else {
+      const data = {
+        email: localStorage.getItem("email"),
+        dataUrl: images[0].data_url,
+        label: label,
+      };
+
+      console.log(data);
+      const upload = await axios.post("/postImage", data);
+
+      images[0] = { ...images[0], label: label };
+
+      props.handleClose(images);
+    }
   };
 
   return (
@@ -24,8 +56,6 @@ export default function Upload(props) {
         open={true}
       >
         <div id="img-upload">
-          <input id="label" type="text" />
-
           <ImageUploading
             multiple
             value={images}
@@ -37,11 +67,11 @@ export default function Upload(props) {
               <div className="upload__image-wrapper">
                 <Button
                   onClick={onImageUpload}
-                  id="ubtn"
+                  id="brw_btn"
                   color="primary"
                   variant="contained"
                 >
-                  Upload
+                  Browse
                 </Button>
                 &nbsp; &nbsp; &nbsp;
                 <Button
@@ -68,8 +98,24 @@ export default function Upload(props) {
               </div>
             )}
           </ImageUploading>
+          <div className="label">
+            <label for="label" style={{ fontWeight: "bolder" }}>
+              Label: &nbsp;
+            </label>
+            <input
+              id="label"
+              type="text"
+              defaultValue={label}
+              onChange={handleChange}
+            />
+            <br />
+            <Button id="ubtn" variant="contained" onClick={handleUpload}>
+              Upload
+            </Button>
+          </div>
         </div>
       </Dialog>
+      {error ? <Alert error={error} handlemessage={handleMessage} /> : null}
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default class Login extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (this.state.email == "" || this.state.password == "")
+    if (this.state.email === "" || this.state.password === "")
       this.setState({ error: "Fill all the fields" });
     else {
       const login = {
@@ -33,16 +33,16 @@ export default class Login extends Component {
         password: this.state.password,
       };
 
-      const auth = await axios.post("/fetchUser", login);
-      console.log(auth.data);
-      if (auth.data == "404" || auth.data == "500") {
-        this.setState({ error: "Invalid email or password" });
-      } else {
+      try {
+        const auth = await axios.post("/fetchUser", login);
+
         localStorage.setItem("loggedIn", true);
         localStorage.setItem("email", auth.data.email);
         localStorage.setItem("username", auth.data.username);
         localStorage.setItem("message", "Logged in successfully");
         this.props.handleLogin();
+      } catch (error) {
+        this.setState({ error: "Invalid email or password" });
       }
     }
   };
