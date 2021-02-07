@@ -6,6 +6,8 @@ import avatar from "../Images/user.svg";
 import gallery from "../Images/gallery.svg";
 import Popper from "@material-ui/core/Popper";
 import Upload from "./upload";
+import MenuIcon from "@material-ui/icons/Menu";
+import Sidebar from "./sidebar";
 
 export default class Header extends Component {
   constructor() {
@@ -15,6 +17,7 @@ export default class Header extends Component {
       anchorEl: null,
       photoCount: 0,
       open: false,
+      openMenu: false,
     };
   }
 
@@ -44,6 +47,14 @@ export default class Header extends Component {
     }
   };
 
+  handleMenu = () => {
+    if (this.state.openMenu) {
+      this.setState({ openMenu: false });
+    } else {
+      this.setState({ openMenu: true });
+    }
+  };
+
   render() {
     const open = Boolean(this.state.anchorEl);
     const id = open ? "simple-popper" : undefined;
@@ -65,6 +76,7 @@ export default class Header extends Component {
             <Button variant="contained" id="add" onClick={this.handleToggle}>
               Add a photo
             </Button>
+
             <div className="gal">
               <img src={gallery} alt="gallery" className="gallery" />
               <img
@@ -74,6 +86,11 @@ export default class Header extends Component {
                 onClick={this.handleClick}
               />
             </div>
+            <MenuIcon
+              id="menu-icon"
+              fontSize="large"
+              onClick={this.handleMenu}
+            />
 
             <Popper id={id} open={open} anchorEl={this.state.anchorEl}>
               <div>
@@ -92,6 +109,12 @@ export default class Header extends Component {
           </div>
           {this.state.open ? <Upload handleClose={this.handleClose} /> : null}
         </div>
+        {this.state.openMenu ? (
+          <Sidebar
+            handleMenu={this.handleMenu}
+            photoCount={this.state.photoCount}
+          />
+        ) : null}
       </div>
     );
   }
